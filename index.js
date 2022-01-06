@@ -4,7 +4,7 @@ const http = axios.create({
   baseURL: 'https://randomuser.me/api/'
 });
 const loadUser = async () => {
-  const {data:{results}} = await http.get('?results=1000&seed=db_fm&page=2');
+  const {data:{results}} = await http.get('?results=1000&seed=abc&page=1&nat=gb');
   return results;
 }
 const config = {
