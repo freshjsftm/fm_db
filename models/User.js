@@ -2,11 +2,11 @@ const {mapUsers} = require('../utils');
 
 module.exports = class User{
   static _client;
-  static _tableName = "users";
+  static _tableName = 'users';
 
   static async createTableIfNotExist(){
     return this._client.query(`
-      CREATE TABLE IF NOT EXISTS ${this._tableName}(
+      CREATE TABLE IF NOT EXISTS "${this._tableName}"(
         "id" bigserial PRIMARY KEY,
         "firstName" VARCHAR(64) NOT NULL CHECK ("firstName" != ''),
         "lastName" VARCHAR(64) NOT NULL CHECK ("lastName" != ''),
@@ -19,12 +19,12 @@ module.exports = class User{
   }
 
   static async findAll(){
-    return this._client.query(`SELECT * FROM ${this._tableName}`);
+    return this._client.query(`SELECT * FROM "${this._tableName}";`);
   }
 
   static async bulkCreate(users){
     return this._client.query(`
-      INSERT INTO ${this._tableName}(
+      INSERT INTO "${this._tableName}"(
         "firstName",
         "lastName",
         "email",
