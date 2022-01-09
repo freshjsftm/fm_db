@@ -11,7 +11,7 @@ module.exports.loadUsers = async (options = {}) => {
     ...usersGET,
     ...options,
   }
-  console.log(querystring.stringify(queryParams));
+  //console.log(querystring.stringify(queryParams));
   const {data:{results}} = await http.get(`?${querystring.stringify(queryParams)}`);
   //console.log(results);
   return results;

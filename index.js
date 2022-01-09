@@ -17,12 +17,12 @@ async function start(){
 
   await client.query(resetDbQueryString);
 
-  const users = await User.bulkCreate(await loadUsers());
+  const {rows:users} = await User.bulkCreate(await loadUsers());
   const phones = await Phone.bulkCreate(generatePhones());
  
   /*create order*/
   const ordersValuesString = users
-    .map(u=> new Array(_.random(1,5,false))
+    .map(u=> new Array(_.random(1,5,false)).fill(null)
       .map(()=>`(${u.id})`).join(',')
     ).join(',');
 
@@ -34,7 +34,7 @@ async function start(){
 
   const phonesToOrdersValuesString = orders
     .map(o=>{
-      const arr = new Array(_.random(1, phones.length))
+      const arr = new Array(_.random(1, phones.length)).fill(null)
         .map(
           ()=> phones[_.random(1, phones.length-1)]
         );
